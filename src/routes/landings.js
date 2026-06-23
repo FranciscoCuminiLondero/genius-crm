@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const landingService = require('../services/landingService')
+const validateBody = require('../middleware/validateBody')
 
 /**
  * @swagger
@@ -210,6 +211,12 @@ router.get('/:id/leads', (req, res, next) => {
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Lead'
+ *       400:
+ *         description: Faltan campos requeridos (name, email)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
  *       404:
  *         description: Landing no encontrada
  *         content:
@@ -217,7 +224,7 @@ router.get('/:id/leads', (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.post('/:id/leads', (req, res, next) => {
+router.post('/:id/leads', validateBody(['name', 'email']), (req, res, next) => {
   try {
     const lead = landingService.createLead(req.params.id, req.body)
     res.status(201).json(lead)
