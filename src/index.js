@@ -4,6 +4,7 @@ const swaggerUi = require('swagger-ui-express')
 const templateRoutes = require('./routes/templates')
 const landingRoutes = require('./routes/landings')
 const errorHandler = require('./middleware/errorHandler')
+const healthRoutes = require('./routes/health')
 
 const app = express()
 app.use(express.json())
@@ -90,6 +91,7 @@ app.get('/openapi.json', (req, res) => res.json(swaggerSpec))
 
 app.use('/api/templates', templateRoutes)
 app.use('/api/landings', landingRoutes)
+app.use('/api/health', healthRoutes)
 
 app.use(errorHandler)
 
