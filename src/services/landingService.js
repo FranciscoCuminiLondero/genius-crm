@@ -1,8 +1,16 @@
 const db = require('../data/db')
 const templateService = require('./templateService')
 
-function getAllLandings() {
-  return db.landings.map(landing => ({
+function getAllLandings(client) {
+  let landings = db.landings
+
+  if (client) {
+    landings = landings.filter(
+      l => (l.client || '').toLowerCase() === client.toLowerCase()
+    )
+  }
+
+  return landings.map(landing => ({
     ...landing,
     leadCount: 0
   }))

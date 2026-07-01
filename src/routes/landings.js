@@ -9,6 +9,12 @@ const validateBody = require('../middleware/validateBody')
  *   get:
  *     summary: Listar todas las landing pages
  *     tags: [Landings]
+ *     parameters:
+ *       - in: query
+ *         name: client
+ *         schema:
+ *           type: string
+ *         description: Filtrar landings por nombre de cliente
  *     responses:
  *       200:
  *         description: Lista de landings
@@ -21,7 +27,7 @@ const validateBody = require('../middleware/validateBody')
  */
 router.get('/', (req, res, next) => {
   try {
-    res.json(landingService.getAllLandings())
+    res.json(landingService.getAllLandings(req.query.client))
   } catch (err) {
     next(err)
   }

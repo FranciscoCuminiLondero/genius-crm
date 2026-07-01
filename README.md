@@ -110,6 +110,7 @@ La carpeta `templates/` contiene ejemplos HTML renderizados de cada tipo. Abrirl
 | GET | `/api/landings/:id/preview` | Previsualizar landing como HTML |
 | GET | `/api/landings/:id/leads` | Listar leads de la landing |
 | POST | `/api/landings/:id/leads` | Registrar un lead |
+| GET | `/api/landings?client={nombre}` | Filtrar landings por cliente |
 
 Los siguientes endpoints están pendientes de implementación:
 
@@ -117,7 +118,6 @@ Los siguientes endpoints están pendientes de implementación:
 |--------|------|-------------|
 | PATCH | `/api/landings/:id` | Editar campos de una landing existente |
 | DELETE | `/api/landings/:id` | Eliminar una landing |
-| GET | `/api/landings?client={nombre}` | Filtrar landings por cliente |
 | PATCH | `/api/landings/:id/status` | Cambiar el estado de una landing |
 | GET | `/api/landings/summary` | Resumen de leads por landing |
 
