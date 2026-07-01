@@ -1,4 +1,9 @@
-const db = {
+const fs = require('fs')
+const path = require('path')
+
+const DB_FILE = path.join(__dirname, 'db.json')
+
+const seed = {
   nextLandingId: 5,
   nextLeadId: 4,
   landings: [
@@ -96,4 +101,26 @@ const db = {
   ]
 }
 
+function loadDb() {
+  if (fs.existsSync(DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(DB_FILE, 'utf-8')
+      return JSON.parse(raw)
+    } catch (err) {
+      console.error('⚠ Error leyendo db.json, se usa el seed original:', err.message)
+      return JSON.parse(JSON.stringify(seed))
+    }
+  }
+  return JSON.parse(JSON.stringify(seed))
+}
+
+const db = loadDb()
+
+function saveDb() {
+  fs.writeFile(DB_FILE, JSON.stringify(db, null, 2), (err) => {
+    if (err) console.error('⚠ Error guardando db.json:', err.message)
+  })
+}
+
 module.exports = db
+module.exports.saveDb = saveDb

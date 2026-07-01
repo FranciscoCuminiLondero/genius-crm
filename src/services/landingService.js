@@ -32,6 +32,7 @@ function createLanding(data) {
   }
 
   db.landings.push(landing)
+  db.saveDb()
   return landing
 }
 
@@ -70,6 +71,7 @@ function createLead(landingId, data) {
   }
 
   db.leads.push(lead)
+  db.saveDb()
   return lead
 }
 
